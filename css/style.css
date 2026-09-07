@@ -1,4 +1,3 @@
-
 :root {
     --bg-color: #0a192f;
     --bg-secondary: #112240;
@@ -166,6 +165,83 @@ section {
     font-size: 0.95rem;
 }
 
+/* Case Study Badges */
+.badge {
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: rgba(100, 255, 218, 0.1);
+    color: var(--accent-color);
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+/* Pricing Table */
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.pricing-card {
+    background-color: var(--bg-secondary);
+    padding: 3rem 2rem;
+    border-radius: 12px;
+    text-align: center;
+    border: 1px solid rgba(100, 255, 218, 0.1);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+}
+
+.pricing-card.featured {
+    border: 2px solid var(--accent-color);
+    transform: scale(1.05);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+.pricing-card h3 {
+    font-size: 1.5rem;
+    color: var(--white);
+    margin-bottom: 1rem;
+}
+
+.price {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    margin-bottom: 2rem;
+}
+
+.price span {
+    font-size: 1rem;
+    color: var(--text-dim);
+}
+
+.pricing-features {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 2rem;
+    flex-grow: 1;
+}
+
+.pricing-features li {
+    margin-bottom: 1rem;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pricing-features li::before {
+    content: "?";
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
 /* Footer */
 footer {
     text-align: center;
@@ -180,4 +256,3 @@ footer {
     .hero h1 { font-size: 2.5rem; }
     .nav-links { display: none; }
 }
-
