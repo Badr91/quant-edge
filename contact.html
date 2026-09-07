@@ -27,18 +27,19 @@
 
     <section style="max-width: 600px; margin: 0 auto;">
         <div class="card" style="border: 1px solid var(--accent-color);">
-            <form style="display: flex; flex-direction: column; gap: 1.5rem;">
+            <!-- UPDATE THE ACTION URL BELOW WITH YOUR FORMSPREE LINK -->
+            <form action="https://formspree.io/f/mbgjzwjd" method="POST" style="display: flex; flex-direction: column; gap: 1.5rem;">
                 <div style="display: flex; flex-direction: column; gap: 0.5rem;">
                     <label style="color: var(--white); font-size: 0.9rem;">Full Name</label>
-                    <input type="text" style="padding: 0.8rem; background: var(--bg-color); border: 1px solid var(--text-dim); color: var(--white); border-radius: 4px;">
+                    <input type="text" name="full_name" required style="padding: 0.8rem; background: var(--bg-color); border: 1px solid var(--text-dim); color: var(--white); border-radius: 4px;">
                 </div>
                 <div style="display: flex; flex-direction: column; gap: 0.5rem;">
                     <label style="color: var(--white); font-size: 0.9rem;">Email Address</label>
-                    <input type="email" style="padding: 0.8rem; background: var(--bg-color); border: 1px solid var(--text-dim); color: var(--white); border-radius: 4px;">
+                    <input type="email" name="email" required style="padding: 0.8rem; background: var(--bg-color); border: 1px solid var(--text-dim); color: var(--white); border-radius: 4px;">
                 </div>
                 <div style="display: flex; flex-direction: column; gap: 0.5rem;">
                     <label style="color: var(--white); font-size: 0.9rem;">Inquiry Type</label>
-                    <select style="padding: 0.8rem; background: var(--bg-color); border: 1px solid var(--text-dim); color: var(--white); border-radius: 4px;">
+                    <select name="inquiry_type" style="padding: 0.8rem; background: var(--bg-color); border: 1px solid var(--text-dim); color: var(--white); border-radius: 4px;">
                         <option>Quant System Access</option>
                         <option>Market Analysis Inquiry</option>
                         <option>Partnership</option>
@@ -46,7 +47,7 @@
                 </div>
                 <div style="display: flex; flex-direction: column; gap: 0.5rem;">
                     <label style="color: var(--white); font-size: 0.9rem;">Message</label>
-                    <textarea rows="5" style="padding: 0.8rem; background: var(--bg-color); border: 1px solid var(--text-dim); color: var(--white); border-radius: 4px;"></textarea>
+                    <textarea name="message" rows="5" required style="padding: 0.8rem; background: var(--bg-color); border: 1px solid var(--text-dim); color: var(--white); border-radius: 4px;"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Send Message</button>
             </form>
