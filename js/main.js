@@ -1,4 +1,4 @@
-import { renderNav, renderFooter, renderAnalysis, initCalculator, renderNews, renderAcademy, renderHomeNews } from "./components.js";
+import { renderNav, renderFooter, renderAnalysis, initCalculator, renderNews, renderAcademy, renderHomeNews, initRRCalculator, initJournal, renderLivePrices } from "./components.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     console.log("QuantEdge Website Loaded Successfully");
@@ -13,6 +13,9 @@ document.addEventListener("DOMContentLoaded", () => {
     renderAcademy();
     renderHomeNews();
     initCalculator();
+    initRRCalculator();
+    initJournal();
+    renderLivePrices();
 
     // Analysis Filtering Logic
     const filterBtn = document.getElementById("analysis-filter");
@@ -65,6 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
 
 
 

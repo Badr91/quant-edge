@@ -346,6 +346,37 @@ footer {
     margin-bottom: 1rem;
 }
 
+/* Journal Table Styles */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    padding: 1rem;
+    border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+}
+
+.outcome-win { color: var(--accent-color); font-weight: 700; }
+.outcome-loss { color: #ff6464; font-weight: 700; }
+.outcome-be { color: var(--text-dim); font-weight: 700; }
+
+.btn-delete {
+    background: transparent;
+    color: #ff6464;
+    border: 1px solid #ff6464;
+    padding: 0.3rem 0.6rem;
+    font-size: 0.7rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: var(--transition);
+}
+
+.btn-delete:hover {
+    background: #ff6464;
+    color: white;
+}
+
 /* Responsive Portal */
 @media (max-width: 1024px) {
     .portal-container {

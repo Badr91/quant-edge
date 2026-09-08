@@ -7,37 +7,34 @@
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
+<body style="padding-top: 80px;">
     <!-- Nav and Footer are injected via js/main.js -->
 
-    <section class="hero" style="height: 40vh;">
+    <section class="hero" style="height: 30vh; background: var(--bg-secondary);">
         <h1>Quant <span style="color: var(--accent-color);">Tools</span></h1>
         <p>Precision instruments for professional risk management.</p>
     </section>
 
     <section>
-        <div class="section-title">
-            <h2>Position Size Calculator</h2>
-            <p>Calculate your lot size based on account risk to ensure long-term survival.</p>
-        </div>
-
-        <div style="max-width: 800px; margin: 0 auto;">
+        <div class="grid">
+            <!-- POSITION SIZE CALCULATOR -->
             <div class="card" style="border: 1px solid var(--accent-color);">
-                <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;">
+                <h2 style="color: var(--white); margin-bottom: 1.5rem; text-align: center;">Position Size Calculator</h2>
+                <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 1rem;">
                     <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                        <label style="color: var(--white); font-size: 0.9rem;">Account Balance ($)</label>
+                        <label style="color: var(--white); font-size: 0.8rem;">Account Balance ($)</label>
                         <input type="number" id="calc-balance" value="10000" style="padding: 0.8rem; background: var(--bg-color); border: 1px solid var(--text-dim); color: var(--white); border-radius: 4px;">
                     </div>
                     <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                        <label style="color: var(--white); font-size: 0.9rem;">Risk Percentage (%)</label>
+                        <label style="color: var(--white); font-size: 0.8rem;">Risk Percentage (%)</label>
                         <input type="number" id="calc-risk" value="1" style="padding: 0.8rem; background: var(--bg-color); border: 1px solid var(--text-dim); color: var(--white); border-radius: 4px;">
                     </div>
                     <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                        <label style="color: var(--white); font-size: 0.9rem;">Stop Loss (Pips)</label>
+                        <label style="color: var(--white); font-size: 0.8rem;">Stop Loss (Pips)</label>
                         <input type="number" id="calc-sl" value="20" style="padding: 0.8rem; background: var(--bg-color); border: 1px solid var(--text-dim); color: var(--white); border-radius: 4px;">
                     </div>
                     <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                        <label style="color: var(--white); font-size: 0.9rem;">Currency Pair</label>
+                        <label style="color: var(--white); font-size: 0.8rem;">Currency Pair</label>
                         <select id="calc-pair" style="padding: 0.8rem; background: var(--bg-color); border: 1px solid var(--text-dim); color: var(--white); border-radius: 4px;">
                             <option value="10">Major (EURUSD, GBPUSD)</option>
                             <option value="7">JPY Pair (USDJPY, EURJPY)</option>
@@ -46,14 +43,50 @@
                     </div>
                 </div>
                 
-                <div style="text-align: center; margin-top: 2rem;">
-                    <button id="calc-btn" class="btn btn-primary" style="width: 100%; max-width: 300px;">Calculate Position Size</button>
+                <div style="text-align: center; margin-top: 1.5rem;">
+                    <button id="calc-btn" class="btn btn-primary" style="width: 100%;">Calculate Position Size</button>
                 </div>
 
-                <div id="calc-result" style="margin-top: 2rem; text-align: center; display: none; padding: 1.5rem; background: rgba(100, 255, 218, 0.05); border-radius: 8px; border: 1px dashed var(--accent-color);">
-                    <p style="color: var(--text-dim); margin-bottom: 0.5rem;">Recommended Position Size</p>
-                    <h2 id="result-lots" style="color: var(--accent-color); font-size: 2.5rem; margin: 0;">0.00 Lots</h2>
-                    <p id="result-risk-amount" style="color: var(--white); margin-top: 0.5rem;">Risk Amount: $0.00</p>
+                <div id="calc-result" style="margin-top: 1.5rem; text-align: center; display: none; padding: 1rem; background: rgba(100, 255, 218, 0.05); border-radius: 8px; border: 1px dashed var(--accent-color);">
+                    <p style="color: var(--text-dim); font-size: 0.8rem; margin-bottom: 0.5rem;">Recommended Position Size</p>
+                    <h2 id="result-lots" style="color: var(--accent-color); font-size: 2rem; margin: 0;">0.00 Lots</h2>
+                    <p id="result-risk-amount" style="color: var(--white); margin-top: 0.5rem; font-size: 0.9rem;">Risk Amount: $0.00</p>
+                </div>
+            </div>
+
+            <!-- RISK REWARD CALCULATOR -->
+            <div class="card" style="border: 1px solid var(--accent-color);">
+                <h2 style="color: var(--white); margin-bottom: 1.5rem; text-align: center;">Advanced RR Calculator</h2>
+                <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                        <label style="color: var(--white); font-size: 0.8rem;">Trade Direction</label>
+                        <select id="rr-dir" style="padding: 0.8rem; background: var(--bg-color); border: 1px solid var(--text-dim); color: var(--white); border-radius: 4px;">
+                            <option value="long">Long (Buy)</option>
+                            <option value="short">Short (Sell)</option>
+                        </select>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                        <label style="color: var(--white); font-size: 0.8rem;">Entry Price</label>
+                        <input type="number" id="rr-entry" value="1.08500" step="0.00001" style="padding: 0.8rem; background: var(--bg-color); border: 1px solid var(--text-dim); color: var(--white); border-radius: 4px;">
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                        <label style="color: var(--white); font-size: 0.8rem;">Stop Loss</label>
+                        <input type="number" id="rr-sl" value="1.08300" step="0.00001" style="padding: 0.8rem; background: var(--bg-color); border: 1px solid var(--text-dim); color: var(--white); border-radius: 4px;">
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                        <label style="color: var(--white); font-size: 0.8rem;">Take Profit</label>
+                        <input type="number" id="rr-tp" value="1.09100" step="0.00001" style="padding: 0.8rem; background: var(--bg-color); border: 1px solid var(--text-dim); color: var(--white); border-radius: 4px;">
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 1.5rem;">
+                    <button id="rr-btn" class="btn btn-primary" style="width: 100%;">Calculate R:R Ratio</button>
+                </div>
+
+                <div id="rr-result" style="margin-top: 1.5rem; text-align: center; display: none; padding: 1rem; background: rgba(100, 255, 218, 0.05); border-radius: 8px; border: 1px dashed var(--accent-color);">
+                    <p style="color: var(--text-dim); font-size: 0.8rem; margin-bottom: 0.5rem;">Risk to Reward Ratio</p>
+                    <h2 id="result-rr" style="color: var(--accent-color); font-size: 2rem; margin: 0;">1:0.00</h2>
+                    <p id="result-pips" style="color: var(--white); margin-top: 0.5rem; font-size: 0.9rem;">SL: 0 pips | TP: 0 pips</p>
                 </div>
             </div>
         </div>

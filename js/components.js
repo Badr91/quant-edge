@@ -99,32 +99,6 @@ export async function renderAcademy() {
     }
 }
 
-export function initCalculator() {
-    const btn = document.getElementById("calc-btn");
-    if (!btn) return;
-
-    btn.addEventListener("click", () => {
-        const balance = parseFloat(document.getElementById("calc-balance").value);
-        const riskPct = parseFloat(document.getElementById("calc-risk").value);
-        const stopLoss = parseFloat(document.getElementById("calc-sl").value);
-        const pipValue = parseFloat(document.getElementById("calc-pair").value);
-
-        if (isNaN(balance) || isNaN(riskPct) || isNaN(stopLoss)) {
-            alert("Please enter valid numbers");
-            return;
-        }
-
-        const riskAmount = balance * (riskPct / 100);
-        const lotSize = riskAmount / (stopLoss * pipValue);
-
-        document.getElementById("calc-result").style.display = "block";
-        document.getElementById("result-lots").textContent = lotSize.toFixed(2) + " Lots";
-        document.getElementById("result-risk-amount").textContent = `Risk Amount: $${riskAmount.toFixed(2)}`;
-    });
-}
-
-
-
 export async function renderHomeNews() {
     const container = document.getElementById("home-news");
     if (!container) return;
@@ -151,6 +125,160 @@ export async function renderHomeNews() {
         `).join("");
     } catch (error) {
         console.error("Error loading home news:", error);
+    }
+}
+
+export function initCalculator() {
+    const btn = document.getElementById("calc-btn");
+    if (!btn) return;
+
+    btn.addEventListener("click", () => {
+        const balance = parseFloat(document.getElementById("calc-balance").value);
+        const riskPct = parseFloat(document.getElementById("calc-risk").value);
+        const stopLoss = parseFloat(document.getElementById("calc-sl").value);
+        const pipValue = parseFloat(document.getElementById("calc-pair").value);
+
+        if (isNaN(balance) || isNaN(riskPct) || isNaN(stopLoss)) {
+            alert("Please enter valid numbers");
+            return;
+        }
+
+        const riskAmount = balance * (riskPct / 100);
+        const lotSize = riskAmount / (stopLoss * pipValue);
+
+        document.getElementById("calc-result").style.display = "block";
+        document.getElementById("result-lots").textContent = lotSize.toFixed(2) + " Lots";
+        document.getElementById("result-risk-amount").textContent = `Risk Amount: $${riskAmount.toFixed(2)}`;
+    });
+}
+
+export function initRRCalculator() {
+    const btn = document.getElementById("rr-btn");
+    if (!btn) return;
+
+    btn.addEventListener("click", () => {
+        const dir = document.getElementById("rr-dir").value;
+        const entry = parseFloat(document.getElementById("rr-entry").value);
+        const sl = parseFloat(document.getElementById("rr-sl").value);
+        const tp = parseFloat(document.getElementById("rr-tp").value);
+
+        if (isNaN(entry) || isNaN(sl) || isNaN(tp)) {
+            alert("Please enter valid prices");
+            return;
+        }
+
+        let risk, reward;
+        if (dir === "long") {
+            risk = entry - sl;
+            reward = tp - entry;
+        } else {
+            risk = sl - entry;
+            reward = entry - tp;
+        }
+
+        if (risk <= 0) {
+            alert("Stop Loss must be on the opposite side of Entry");
+            return;
+        }
+
+        const rr = reward / risk;
+        const pipsSL = (Math.abs(entry - sl) * 10000).toFixed(1);
+        const pipsTP = (Math.abs(tp - entry) * 10000).toFixed(1);
+
+        document.getElementById("rr-result").style.display = "block";
+        document.getElementById("result-rr").textContent = `1:${rr.toFixed(2)}`;
+        document.getElementById("result-pips").textContent = `SL: ${pipsSL} pips | TP: ${pipsTP} pips`;
+    });
+}
+
+export function initJournal() {
+    const form = document.getElementById("journal-form");
+    if (!form) return;
+
+    const loadTrades = () => {
+        const trades = JSON.parse(localStorage.getItem("qe_trades") || "[]");
+        const body = document.getElementById("journal-body");
+        
+        body.innerHTML = trades.map((t, index) => `
+            <tr>
+                <td>${t.date}</td>
+                <td>${t.pair}</td>
+                <td class="outcome-${t.outcome.toLowerCase()}">${t.outcome}</td>
+                <td>${t.rr}</td>
+                <td><button class="btn-delete" onclick="window.deleteTrade(${index})">Delete</button></td>
+            </tr>
+        `).join("");
+
+        updateJournalMetrics(trades);
+    };
+
+    const updateJournalMetrics = (trades) => {
+        const total = trades.length;
+        const wins = trades.filter(t => t.outcome === "Win").length;
+        const losses = trades.filter(t => t.outcome === "Loss").length;
+        const winRate = total > 0 ? ((wins / total) * 100).toFixed(1) : 0;
+
+        document.getElementById("win-rate").textContent = winRate + "%";
+        document.getElementById("total-trades").textContent = total;
+        document.getElementById("total-wins").textContent = wins;
+        document.getElementById("total-losses").textContent = losses;
+    };
+
+    window.deleteTrade = (index) => {
+        const trades = JSON.parse(localStorage.getItem("qe_trades") || "[]");
+        trades.splice(index, 1);
+        localStorage.setItem("qe_trades", JSON.stringify(trades));
+        loadTrades();
+    };
+
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const newTrade = {
+            pair: document.getElementById("j-pair").value,
+            outcome: document.getElementById("j-outcome").value,
+            rr: document.getElementById("j-rr").value,
+            date: document.getElementById("j-date").value,
+            notes: document.getElementById("j-notes").value
+        };
+
+        const trades = JSON.parse(localStorage.getItem("qe_trades") || "[]");
+        trades.push(newTrade);
+        localStorage.setItem("qe_trades", JSON.stringify(trades));
+        form.reset();
+        loadTrades();
+    });
+
+    loadTrades();
+}
+
+export async function renderLivePrices() {
+    const sidebar = document.querySelector(".sidebar");
+    if (!sidebar) return;
+
+    try {
+        // Fetching BTC, ETH, SOL prices from CoinGecko (No API Key required for public)
+        const response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=usd");
+        const data = await response.json();
+
+        const priceHtml = `
+            <div class="sidebar-widget" style="margin-top: 2rem;">
+                <h4>Live Quant Feed</h4>
+                <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.85rem;">
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>BTC/USD</span> <span style="color: var(--accent-color); font-weight: 700;">$${data.bitcoin.usd.toLocaleString()}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>ETH/USD</span> <span style="color: var(--accent-color); font-weight: 700;">$${data.ethereum.usd.toLocaleString()}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>SOL/USD</span> <span style="color: var(--accent-color); font-weight: 700;">$${data.solana.usd.toLocaleString()}</span>
+                    </div>
+                </div>
+            </div>
+        `;
+        sidebar.insertAdjacentHTML("beforeend", priceHtml);
+    } catch (error) {
+        console.error("Price API error:", error);
     }
 }
 
