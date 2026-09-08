@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "date": "Sept 8, 2026",
+        "category": "Macro",
+        "title": "Federal Reserve Signal: Pivot Looming?",
+        "summary": "Analyzing the latest FOMC minutes and the quantitative shift in interest rate expectations for Q4.",
+        "image": "https://images.unsplash.com/photo-1611974717484-87752966046b?q=80&w=800",
+        "source": "Financial Times",
+        "link": "#"
+    },
+    {
+        "id": 2,
+        "date": "Sept 7, 2026",
+        "category": "Crypto",
+        "title": "Ethereum Layer 2 Surge",
+        "summary": "The massive shift in liquidity from L1 to L2 solutions and what it means for institutional adoption.",
+        "image": "https://images.unsplash.com/photo-1621761191319-75583798693f?q=80&w=800",
+        "source": "CoinDesk",
+        "link": "#"
+    },
+    {
+        "id": 3,
+        "date": "Sept 6, 2026",
+        "category": "Forex",
+        "title": "USD/JPY Intervention Warning",
+        "summary": "BoJ officials hint at further action to support the Yen, creating high-risk liquidity gaps.",
+        "image": "https://images.unsplash.com/photo-1526303323989-7569ca796321?q=80&w=800",
+        "source": "Bloomberg",
+        "link": "#"
+    }
+]

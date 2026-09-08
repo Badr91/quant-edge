@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "title": "What is a Liquidity Sweep?",
+        "summary": "A liquidity sweep occurs when price moves past a known high or low to trigger stop losses before reversing.",
+        "content": "Institutions need large amounts of liquidity to fill their orders. By pushing price into a zone where retail stop-losses are clustered (e.g., above a previous daily high), they create a surge of sell orders they can buy into, which then fuels the move in the opposite direction.",
+        "icon": "??"
+    },
+    {
+        "id": 2,
+        "title": "Fair Value Gaps (FVG)",
+        "summary": "An imbalance in price action where only one side of the market (buyers or sellers) is present.",
+        "content": "A FVG is a three-candle sequence where the first and third candles do not overlap, leaving a gap in the middle. Markets have a mathematical tendency to return to these gaps to provide liquidity and balance the price action.",
+        "icon": "??"
+    },
+    {
+        "id": 3,
+        "title": "Order Blocks (OB)",
+        "summary": "The footprints of institutional buying or selling.",
+        "content": "An order block is the last opposite-colored candle before a strong move that breaks market structure. It represents where institutions placed their large orders, and price often returns to these zones to pick up remaining orders.",
+        "icon": "??"
+    }
+]

@@ -5,6 +5,8 @@ const CONFIG = {
     contactEmail: "contact@quantedge.io",
     navLinks: [
         { name: "Home", url: "index.html" },
+        { name: "News Hub", url: "news.html" },
+        { name: "Academy", url: "academy.html" },
         { name: "Markets", url: "markets.html" },
         { name: "Analysis", url: "analysis.html" },
         { name: "Tools", url: "tools.html" },

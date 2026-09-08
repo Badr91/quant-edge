@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Hub | QuantEdge Intelligence</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body style="padding-top: 80px;">
+    <!-- Nav and Footer are injected via js/main.js -->
+
+    <section class="hero" style="height: 30vh; background: var(--bg-secondary);">
+        <h1>Intelligence <span style="color: var(--accent-color);">Feed</span></h1>
+        <p>Real-time macro trends and institutional news filtered for quant traders.</p>
+    </section>
+
+    <section>
+        <div class="portal-container">
+            <div id="news-feed">
+                <!-- News cards injected here -->
+            </div>
+
+            <aside class="sidebar">
+                <div class="sidebar-widget">
+                    <h4>Economic Calendar</h4>
+                    <ul style="list-style: none; font-size: 0.85rem; color: var(--text-dim);">
+                        <li style="margin-bottom: 10px; display: flex; justify-content: space-between;">
+                            <span>USD CPI Data</span> <span style="color: var(--accent-color);">Tomorrow</span>
+                        </li>
+                        <li style="margin-bottom: 10px; display: flex; justify-content: space-between;">
+                            <span>BoJ Rate Decision</span> <span style="color: var(--accent-color);">Sept 12</span>
+                        </li>
+                        <li style="margin-bottom: 10px; display: flex; justify-content: space-between;">
+                            <span>EUR GDP Report</span> <span style="color: var(--accent-color);">Sept 15</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="sidebar-widget">
+                    <h4>Top-Tier Sources</h4>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <a href="#" style="color: var(--text-main); text-decoration: none; font-size: 0.85rem;">&rarr; Financial Times</a>
+                        <a href="#" style="color: var(--text-main); text-decoration: none; font-size: 0.85rem;">&rarr; Bloomberg Terminal</a>
+                        <a href="#" style="color: var(--text-main); text-decoration: none; font-size: 0.85rem;">&rarr; Reuters Business</a>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </section>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

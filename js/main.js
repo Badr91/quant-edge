@@ -1,4 +1,4 @@
-import { renderNav, renderFooter, renderAnalysis, initCalculator } from "./components.js";
+import { renderNav, renderFooter, renderAnalysis, initCalculator, renderNews, renderAcademy, renderHomeNews } from "./components.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     console.log("QuantEdge Website Loaded Successfully");
@@ -9,6 +9,9 @@ document.addEventListener("DOMContentLoaded", () => {
     
     // Page-specific initializations
     renderAnalysis();
+    renderNews();
+    renderAcademy();
+    renderHomeNews();
     initCalculator();
 
     // Analysis Filtering Logic
@@ -20,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Add reveal class to all cards and section titles for animation
-    document.querySelectorAll(".card, .section-title").forEach(el => {
+    document.querySelectorAll(".card, .section-title, .news-card, .capsule").forEach(el => {
         el.classList.add("reveal");
     });
 
@@ -62,6 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
 
 
 
