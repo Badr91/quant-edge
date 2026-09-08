@@ -9,17 +9,7 @@
 </head>
 <body>
 
-    <nav>
-        <a href="index.html" class="logo">QUANT<span>EDGE</span></a>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="markets.html">Markets</a></li>
-            <li><a href="analysis.html">Analysis</a></li>
-            <li><a href="quant.html">Quant System</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
-        <a href="contact.html" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.8rem;">Get Access</a>
-    </nav>
+    <!-- Nav and Footer are injected via js/main.js -->
 
     <section class="hero" style="height: 70vh;">
         <h1>The <span style="color: var(--accent-color);">Institutional</span> Framework</h1>
@@ -44,6 +34,27 @@
             <div class="card">
                 <h3 style="color: var(--white);">Layer 3: Quant Filtering</h3>
                 <p>Every signal is filtered through a quantitative layer: <strong style="color: var(--white);">VWAP, Z-Score (Mean Reversion), and Volume Strength</strong>. If the quant filter disagrees with the price action, the trade is discarded.</p>
+            </div>
+        </div>
+    </section>
+
+    <section style="background-color: var(--bg-secondary);">
+        <div class="section-title">
+            <h2>The Golden Rule: Risk Management</h2>
+            <p>Intelligence is useless without survival. Our framework enforces strict capital preservation.</p>
+        </div>
+        <div class="grid">
+            <div class="card">
+                <h3 style="color: var(--accent-color);">Fixed Risk Per Trade</h3>
+                <p>We never risk more than 0.5% to 1% of total equity on a single setup. This ensures a "statistical edge" can play out over hundreds of trades.</p>
+            </div>
+            <div class="card">
+                <h3 style="color: var(--accent-color);">Asymmetric RR</h3>
+                <p>We target a minimum of 1:3 Reward-to-Risk. By keeping losses small and wins large, our win rate can be as low as 30% while remaining highly profitable.</p>
+            </div>
+            <div class="card">
+                <h3 style="color: var(--accent-color);">Dynamic De-risking</h3>
+                <p>Once a trade reaches 1:1 RR, we move the Stop Loss to break-even. We trade the market's reality, not our expectations.</p>
             </div>
         </div>
     </section>
@@ -126,11 +137,6 @@
         <a href="contact.html" class="btn btn-primary" style="font-size: 1.2rem; padding: 1.5rem 3rem;">Apply for Framework Access</a>
     </section>
 
-    <footer>
-        <p>&copy; 2026 QuantEdge Intelligence. All Rights Reserved.</p>
-        <p style="font-size: 0.8rem; margin-top: 1rem;">Our framework is based on the quantification of institutional order flow.</p>
-    </footer>
-
-    <script src="js/main.js"></script>
+    <script type="module" src="js/main.js"></script>
 </body>
 </html>

@@ -8,17 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <nav>
-        <a href="index.html" class="logo">QUANT<span>EDGE</span></a>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="markets.html">Markets</a></li>
-            <li><a href="analysis.html">Analysis</a></li>
-            <li><a href="quant.html">Quant System</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
-        <a href="quant.html" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.8rem;">Get Access</a>
-    </nav>
+    <!-- Nav and Footer are injected via js/main.js -->
 
     <section class="hero" style="height: 40vh;">
         <h1>Market <span style="color: var(--accent-color);">Analysis</span></h1>
@@ -26,31 +16,23 @@
     </section>
 
     <section>
-        <div class="grid">
-            <div class="card">
-                <div style="color: var(--accent-color); font-size: 0.8rem; margin-bottom: 0.5rem;">Sept 5, 2026 &bull; Crypto</div>
-                <h3>The BTC Liquidity Gap: Analysis</h3>
-                <p>Analyzing the current order block distribution and why $62k remains the key pivot point for Q4.</p>
-                <a href="#" style="color: var(--accent-color); text-decoration: none; font-size: 0.8rem; display: block; margin-top: 1rem;">Read Full Analysis &rarr;</a>
+        <div class="section-title">
+            <h2>Quantitative Insights</h2>
+            <p>Filter by asset class to find the intelligence you need.</p>
+            <div style="margin-top: 1.5rem;">
+                <select id="analysis-filter" style="padding: 0.6rem 1.2rem; background: var(--bg-color); border: 1px solid var(--accent-color); color: var(--white); border-radius: 4px; cursor: pointer;">
+                    <option value="All">All Assets</option>
+                    <option value="Crypto">Crypto</option>
+                    <option value="Forex">Forex</option>
+                    <option value="Equities">Equities</option>
+                </select>
             </div>
-            <div class="card">
-                <div style="color: var(--accent-color); font-size: 0.8rem; margin-bottom: 0.5rem;">Sept 3, 2026 &bull; Forex</div>
-                <h3>USD Index & The Fed Outlook</h3>
-                <p>How expected rate cuts are impacting the DXY and the resulting ripple effect on EURUSD.</p>
-                <a href="#" style="color: var(--accent-color); text-decoration: none; font-size: 0.8rem; display: block; margin-top: 1rem;">Read Full Analysis &rarr;</a>
-            </div>
-            <div class="card">
-                <div style="color: var(--accent-color); font-size: 0.8rem; margin-bottom: 0.5rem;">Aug 30, 2026 &bull; Equities</div>
-                <h3>Tech Sector Volatility</h3>
-                <p>Comparing current AI-driven growth with 2000-era bubbles: A quantitative approach.</p>
-                <a href="#" style="color: var(--accent-color); text-decoration: none; font-size: 0.8rem; display: block; margin-top: 1rem;">Read Full Analysis &rarr;</a>
-            </div>
+        </div>
+        <div class="grid" id="analysis-grid">
+            <!-- Analysis cards are injected dynamically via js/main.js -->
         </div>
     </section>
 
-    <footer>
-        <p>&copy; 2026 QuantEdge Intelligence. All Rights Reserved.</p>
-    </footer>
-    <script src="js/main.js"></script>
+    <script type="module" src="js/main.js"></script>
 </body>
 </html>
