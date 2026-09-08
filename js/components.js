@@ -4,6 +4,10 @@ export function renderNav() {
     const navHtml = `
     <nav>
         <a href="${CONFIG.navLinks[0].url}" class="logo">${CONFIG.siteName.slice(0, 5)}<span style="color: var(--accent-color);">${CONFIG.siteName.slice(5)}</span></a>
+        <div class="nav-search-container" style="display: flex; align-items: center; background: rgba(255,255,255,0.05); border-radius: 20px; padding: 5px 15px; border: 1px solid rgba(100,255,218,0.2);">
+            <span style="color: var(--accent-color); margin-right: 10px;">🔍</span>
+            <input type="text" id="global-search" placeholder="Search Academy, News..." style="background: transparent; border: none; color: white; outline: none; font-size: 0.8rem; width: 150px;">
+        </div>
         <ul class="nav-links">
             ${CONFIG.navLinks.map(link => `<li><a href="${link.url}">${link.name}</a></li>`).join("")}
         </ul>
@@ -85,14 +89,19 @@ export async function renderAcademy() {
         const response = await fetch("./data/knowledge.json");
         const data = await response.json();
 
-        container.innerHTML = data.map(item => `
-            <div class="capsule" onclick="alert(\`${item.content}\`)">
-                <div class="capsule-icon">${item.icon}</div>
-                <h3>${item.title}</h3>
+        container.innerHTML = data.map((item, index) => {
+            const isPremium = index === data.length - 1; // Lock the last item
+            const clickHandler = isPremium ? `window.unlockPremium(\${item.id}) ? alert(\`${item.content}\`) : null` : `alert(\`${item.content}\`)`;
+            
+            return `
+            <div class="capsule" onclick="\${${clickHandler}}">
+                <div class="capsule-icon">${isPremium ? "??" : item.icon}</div>
+                <h3>${item.title} ${isPremium ? " (Premium)" : ""}</h3>
                 <p>${item.summary}</p>
-                <span style="color: var(--accent-color); font-size: 0.8rem; margin-top: 10px; display: block;">Click to expand &rarr;</span>
+                <span style="color: var(--accent-color); font-size: 0.8rem; margin-top: 10px; display: block;">${isPremium ? "Unlock to read &rarr;" : "Click to expand &rarr;"}</span>
             </div>
-        `).join("");
+            `;
+        }).join("");
     } catch (error) {
         console.error("Error loading academy:", error);
         container.innerHTML = "<p>Failed to load knowledge capsules.</p>";
@@ -281,4 +290,25 @@ export async function renderLivePrices() {
         console.error("Price API error:", error);
     }
 }
+
+
+
+export function renderLeadModal() {
+    const modalHtml = `
+    <div id="lead-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; justify-content: center; align-items: center; backdrop-filter: blur(5px);">
+        <div class="card" style="max-width: 400px; text-align: center; border: 2px solid var(--accent-color);">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">??</div>
+            <h3 style="color: white;">Unlock Premium Insight</h3>
+            <p style="margin-bottom: 1.5rem; color: var(--text-dim);">Join our inner circle to access this institutional analysis. We only send high-conviction updates.</p>
+            <form id="lead-form" style="display: flex; flex-direction: column; gap: 1rem;">
+                <input type="email" id="lead-email" placeholder="your@email.com" required style="padding: 0.8rem; background: var(--bg-color); border: 1px solid var(--text-dim); color: var(--white); border-radius: 4px;">
+                <button type="submit" class="btn btn-primary">Unlock Now</button>
+            </form>
+            <button onclick="document.getElementById(\"lead-modal\").style.display=\"none\"" style="background: transparent; border: none; color: var(--text-dim); margin-top: 1rem; cursor: pointer; font-size: 0.8rem;">Maybe later</button>
+        </div>
+    </div>
+    `;
+    document.body.insertAdjacentHTML("beforeend", modalHtml);
+}
+
 

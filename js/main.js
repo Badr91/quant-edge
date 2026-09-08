@@ -1,11 +1,23 @@
-import { renderNav, renderFooter, renderAnalysis, initCalculator, renderNews, renderAcademy, renderHomeNews, initRRCalculator, initJournal, renderLivePrices } from "./components.js";
+import { renderNav, renderFooter, renderAnalysis, initCalculator, renderNews, renderAcademy, renderHomeNews, initRRCalculator, initJournal, renderLivePrices, renderLeadModal } from "./components.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     console.log("QuantEdge Website Loaded Successfully");
 
+    // Register Service Worker for PWA
+    if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+            navigator.serviceWorker.register("/sw.js").then(reg => {
+                console.log("SW Registered!");
+            }).catch(err => {
+                console.log("SW Registration Failed:", err);
+            });
+        });
+    }
+
     // Render common components
     renderNav();
     renderFooter();
+    renderLeadModal();
     
     // Page-specific initializations
     renderAnalysis();
@@ -16,6 +28,58 @@ document.addEventListener("DOMContentLoaded", () => {
     initRRCalculator();
     initJournal();
     renderLivePrices();
+
+    // GLOBAL SEARCH LOGIC
+    const searchInput = document.getElementById("global-search");
+    if (searchInput) {
+        searchInput.addEventListener("input", async (e) => {
+            const query = e.target.value.toLowerCase();
+            if (query.length < 3) return;
+
+            try {
+                const [news, academy, analysis] = await Promise.all([
+                    fetch("./data/news.json").then(r => r.json()),
+                    fetch("./data/knowledge.json").then(r => r.json()),
+                    fetch("./data/analysis.json").then(r => r.json())
+                ]);
+
+                const results = [
+                    ...news.filter(i => i.title.toLowerCase().includes(query)).map(i => ({...i, type: 'News'})),
+                    ...academy.filter(i => i.title.toLowerCase().includes(query)).map(i => ({...i, type: 'Academy'})),
+                    ...analysis.filter(i => i.title.toLowerCase().includes(query)).map(i => ({...i, type: 'Analysis'}))
+                ];
+
+                console.log("Search Results:", results);
+                // In a full app, we would render a search dropdown here.
+                if(results.length > 0) {
+                    alert(`Found ${results.length} results. Check your console for details!`);
+                }
+            } catch (err) {
+                console.error("Search error:", err);
+            }
+        });
+    }
+
+    // GATED CONTENT LOGIC
+    window.unlockPremium = (id) => {
+        if (localStorage.getItem("qe_premium_unlocked") === "true") {
+            return true;
+        }
+        document.getElementById("lead-modal").style.display = "flex";
+        return false;
+    };
+
+    const leadForm = document.getElementById("lead-form");
+    if (leadForm) {
+        leadForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const email = document.getElementById("lead-email").value;
+            console.log("Capturing Lead:", email);
+            localStorage.setItem("qe_premium_unlocked", "true");
+            document.getElementById("lead-modal").style.display = "none";
+            alert("Access Granted! Welcome to the inner circle.");
+        });
+    }
 
     // Analysis Filtering Logic
     const filterBtn = document.getElementById("analysis-filter");
@@ -68,6 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
 
 
 
